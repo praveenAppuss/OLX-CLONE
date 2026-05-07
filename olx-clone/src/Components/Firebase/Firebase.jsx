@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth, GoogleAuthProvider} from "firebase/auth"
 import {getStorage} from "firebase/storage"
-import {collection, doc, getDoc, getFirestore} from "firebase/firestore"
+import { collection, getDocs, getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyAqwRfzat2OMohYNujr_UVDK78JtBwkTeE",
@@ -22,8 +22,8 @@ const fireStore = getFirestore()
 
 const fetchFromFireStore = async()=>{
     try{
-        const productsCollection =collection(fireStore,'products')
-        const productSnapshot =await getDoc(productsCollection)
+        const productsCollection =collection(fireStore,'Products')
+        const productSnapshot =await getDocs(productsCollection)
         const productList = productSnapshot.docs.map(doc=>({
             id:doc.id,
             ...doc.data()

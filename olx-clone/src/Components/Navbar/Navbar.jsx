@@ -6,7 +6,7 @@ import searchwt from '../../assets/search.svg'
 
 const Navbar = (props) => {
 
-    const {toggleModal}=props
+    const {toggleModal,toggleModalSell}=props
     return (
         <div>
 
@@ -44,6 +44,8 @@ const Navbar = (props) => {
                 </div>
 
                 <p onClick={toggleModal} className='cursor-pointer'>Login</p>
+                <br />
+                <p onClick={toggleModalSell}>Sell</p>
             </nav>
         </div>
     )
