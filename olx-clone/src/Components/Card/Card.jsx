@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+import Favorite from '../../assets/favorite.svg'
 
 const Card = ({items}) => {
   return (
@@ -5,6 +8,7 @@ const Card = ({items}) => {
         <h1 style={{color:'#002f34'}} className="text-2xl">Fresh Recommendations</h1>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-5">
             {items.map((item)=>(
+                <Link to={'/details'} state={{item}} key={item.id} style={{borderWidth:'1px' ,borderColor:'lightgray'}}>
                 <div key={item.id} 
                 style={{borderWidth:'1px',borderColor:'lightgray'}}
                 className="relative w-full h-72 rounded-md border-solid bg-gray-50 overflow-hidden cursor-pointer">
@@ -21,8 +25,13 @@ const Card = ({items}) => {
                         <p className="pt-1 text-sm">{item.description}</p>
                     </div>
 
+                    <div className="absolute flex justify-center items-center p-2 bg-white rounded-full top-3 right-3 cursor-pointer">
+                        <img className="w-5" src={Favorite} alt="" />
+                    </div>
+
 
                 </div>
+                </Link>
 
             ))}
 

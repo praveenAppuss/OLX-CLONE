@@ -4,8 +4,14 @@ import search from '../../assets/search1.svg'
 import arrow from '../../assets/arrow-down.svg'
 import searchwt from '../../assets/search.svg'
 
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { auth } from '../Firebase/Firebase'
+import addBtn from '../../assets/addButton.png'
+
+
 const Navbar = (props) => {
 
+    const [user] =useAuthState(auth)
     const {toggleModal,toggleModalSell}=props
     return (
         <div>
@@ -43,10 +49,34 @@ const Navbar = (props) => {
 
                 </div>
 
-                <p onClick={toggleModal} className='cursor-pointer'>Login</p>
-                <br />
-                <p onClick={toggleModalSell}>Sell</p>
+                {!user ?(
+                    <p onClick={toggleModal} className='font-bold underline ml-5 cursor-pointer' style={{color:'#002f34'}}>Login</p>
+                ):(
+                    <div className='relative'>
+                        <p style={{color:'#002f34'}} className='font-bold ml-5 cursor-pointer'>{user.displayName?.split(' ')[0]}</p>
+                    </div>
+                )}
+                <img onClick={user ? toggleModalSell :toggleModal} className='w-24 mx-1 sm:ml-5 sm:mr-5 shadow-xl rounded-full cursor-pointer' src={addBtn} alt="" />
             </nav>
+            <div className='w-full relative z-0 flex shadow-md p-2 pt-20 pl-10 pr-10 sm:pl-44 md:pr-44 sub-lists'>
+                            <ul className='list-none flex items-center justify-between w-full'>
+                                <div  className='flex flex-shrink-0'>
+                                    <p  className='font-semibold uppercase all-cats'> All categories</p>
+                                    <img className='w-4 ml-2' src={arrow} alt="" />
+            
+                                </div>
+            
+                                <li>Cars</li>
+                                <li>Motorcycles</li>
+                                <li>Mobile Phones</li>
+                                <li>For sale : Houses & Apartments</li>
+                                <li>Scooter</li>
+                                <li>Commercial & Other Vehicles</li>
+                                <li>For rent : Houses & Apartments</li>
+            
+                            </ul>
+            
+                        </div>
         </div>
     )
 }
